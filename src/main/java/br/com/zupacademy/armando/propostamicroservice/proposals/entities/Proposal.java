@@ -16,15 +16,24 @@ public class Proposal {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank @CPFOrCNPJ
+    @Column(nullable = false)
     private String document;
     @NotBlank @Email
+    @Column(nullable = false)
     private String email;
     @NotBlank
+    @Column(nullable = false)
     private String name;
     @NotBlank
+    @Column(nullable = false)
     private String address;
     @NotNull @Positive
+    @Column(nullable = false)
     private BigDecimal salary;
+
+    @Deprecated
+    public Proposal() {
+    }
 
     public Proposal(String document, String email, String name, String address, BigDecimal salary) {
         this.document = document;

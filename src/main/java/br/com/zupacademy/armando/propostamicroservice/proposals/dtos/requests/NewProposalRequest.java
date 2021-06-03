@@ -14,7 +14,7 @@ public class NewProposalRequest {
 
     @JsonProperty
     @NotBlank @CPFOrCNPJ
-    final String document;
+    public final String document;
     @JsonProperty
     @NotBlank @Email
     final String email;

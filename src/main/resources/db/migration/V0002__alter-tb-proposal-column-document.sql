@@ -1,0 +1,1 @@
+alter table tb_proposal change column document document varchar(255) unique not null;
