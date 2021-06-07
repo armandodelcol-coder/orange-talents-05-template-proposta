@@ -16,4 +16,6 @@ public interface ProposalRepository extends JpaRepository<Proposal, Long> {
     @Query("select p from Proposal p where p.status = 'ELEGIVEL' and p.card is null")
     List<Proposal> findEligible();
 
+    List<Proposal> findByStatusIsNull();
+
 }
