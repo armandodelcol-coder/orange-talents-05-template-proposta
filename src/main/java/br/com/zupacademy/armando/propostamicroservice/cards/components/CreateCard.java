@@ -3,26 +3,26 @@ package br.com.zupacademy.armando.propostamicroservice.cards.components;
 import br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response.CardResponse;
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.CardDueDate;
-import br.com.zupacademy.armando.propostamicroservice.cards.repositories.CardRepository;
-import br.com.zupacademy.armando.propostamicroservice.cards.repositories.CardDueDateRepository;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @Component
 public class CreateCard {
 
-    private CardRepository cardRepository;
-    private CardDueDateRepository cardDueDateRepository;
+    private EntityManager entityManager;
 
-    public CreateCard(CardRepository cardRepository, CardDueDateRepository cardDueDateRepository) {
-        this.cardRepository = cardRepository;
-        this.cardDueDateRepository = cardDueDateRepository;
+    public CreateCard(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
+    @Transactional
     public Card newCard(CardResponse cardResponse) {
         Card newCard = cardResponse.toModel();
-        cardRepository.save(newCard);
+        entityManager.persist(newCard);
         CardDueDate newCardCardDueDate = cardResponse.getVencimentoToModel(newCard);
-        cardDueDateRepository.save(newCardCardDueDate);
+        entityManager.persist(newCardCardDueDate);
         return newCard;
     }
 
