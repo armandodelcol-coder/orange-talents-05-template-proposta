@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.request;
+package br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.boot.jackson.JsonComponent;

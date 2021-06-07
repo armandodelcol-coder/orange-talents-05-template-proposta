@@ -1,9 +1,9 @@
 package br.com.zupacademy.armando.propostamicroservice.proposals.controllers;
 
 import br.com.zupacademy.armando.propostamicroservice.config.exceptionhandler.ApiGenericException;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.ProposalAnalysisClient;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.request.ProposalAnalysisRequest;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.response.ProposalAnalysisResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.ProposalAnalysisClient;
+import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.ProposalAnalysisRequest;
+import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response.ProposalAnalysisResponse;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.requests.NewProposalRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
 import br.com.zupacademy.armando.propostamicroservice.proposals.repository.ProposalRepository;
@@ -70,7 +70,7 @@ public class NewProposalController {
           proposal.getId().toString()
         );
         try {
-            ProposalAnalysisResponse proposalAnalysisResponse = proposalAnalysisClient.request(proposalAnalysisRequest);
+            ProposalAnalysisResponse proposalAnalysisResponse = proposalAnalysisClient.requestAnalysis(proposalAnalysisRequest);
             return proposalAnalysisResponse;
         }
         catch (FeignException.UnprocessableEntity exception) {

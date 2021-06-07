@@ -1,0 +1,1 @@
+alter table tb_proposal add constraint fk_proposal_card foreign key (card_number) references tb_card (id);

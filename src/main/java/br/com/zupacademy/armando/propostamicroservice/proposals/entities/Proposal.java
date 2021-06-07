@@ -1,5 +1,6 @@
 package br.com.zupacademy.armando.propostamicroservice.proposals.entities;
 
+import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
 import br.com.zupacademy.armando.propostamicroservice.core.validations.CPFOrCNPJ;
 import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalStatus;
 
@@ -40,6 +41,10 @@ public class Proposal {
     @Enumerated(EnumType.STRING)
     private ProposalStatus status;
 
+    @OneToOne
+    @JoinColumn(name = "card_number")
+    private Card card;
+
     @Deprecated
     public Proposal() {
     }
@@ -66,6 +71,10 @@ public class Proposal {
 
     public void setStatus(ProposalStatus status) {
         this.status = status;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 
 }
