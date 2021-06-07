@@ -27,15 +27,20 @@ public class Card {
     @Column(columnDefinition = "decimal", precision = 2, scale = 10, nullable = false, name = "credit_limit")
     private BigDecimal limit;
 
+    @NotNull
+    @Column(columnDefinition = "tinyint unsigned", nullable = false)
+    private Integer dueDateDay;
+
     @Deprecated
     public Card() {
     }
 
-    public Card(String id, LocalDateTime emissionDate, String owner, BigDecimal limit) {
+    public Card(String id, LocalDateTime emissionDate, String owner, BigDecimal limit, Integer dueDateDay) {
         this.id = id;
         this.emissionDate = emissionDate;
         this.owner = owner;
         this.limit = limit;
+        this.dueDateDay = dueDateDay;
     }
 
     public String getId() {
@@ -52,6 +57,10 @@ public class Card {
 
     public BigDecimal getLimit() {
         return limit;
+    }
+
+    public Integer getDueDateDay() {
+        return dueDateDay;
     }
 
 }

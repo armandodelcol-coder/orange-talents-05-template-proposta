@@ -1,7 +1,6 @@
 package br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response;
 
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
-import br.com.zupacademy.armando.propostamicroservice.cards.entities.CardDueDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -58,17 +57,8 @@ public class CardResponse {
                 this.id,
                 this.emitidoEm,
                 this.titular,
-                this.limite
-        );
-    }
-
-    public CardDueDate getVencimentoToModel(Card card) {
-        return new CardDueDate(
-                this.vencimento.getId(),
-                this.vencimento.getDia(),
-                this.vencimento.getDataDeCriacao(),
-                card
-        );
+                this.limite,
+                this.vencimento.getDia());
     }
 
 }
