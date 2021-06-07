@@ -6,6 +6,7 @@ import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.Pro
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response.ProposalAnalysisResponse;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.NewProposalRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
+import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalStatus;
 import br.com.zupacademy.armando.propostamicroservice.proposals.repository.ProposalRepository;
 import br.com.zupacademy.armando.propostamicroservice.proposals.utils.ProposalStatusMapper;
 import feign.FeignException;
@@ -41,10 +42,8 @@ public class NewProposalController {
                                          UriComponentsBuilder uriComponentsBuilder) throws ApiGenericException {
         // Criar proposta
         Proposal proposal = newProposalCreated(newProposalRequest);
-        // Fazer analise da proposta em uma api externa
-        ProposalAnalysisResponse proposalAnalysisResponse = requestProposalAnalysis(proposal);
-        // Seta o status da proposta baseado na resposta da api externa
-        proposal.setStatus(ProposalStatusMapper.statusMap.get(proposalAnalysisResponse.getResultadoSolicitacao()));
+        // Fazer analise da proposta em uma api externa e Seta o status da proposta baseado na resposta da api externa
+        requestProposalAnalysis(proposal);
         // Update na proposta
         proposalRepository.save(proposal);
         URI path = uriComponentsBuilder.path("/propostas/{id}").build(proposal.getId());
@@ -62,7 +61,7 @@ public class NewProposalController {
         return newProposal;
     }
 
-    private ProposalAnalysisResponse requestProposalAnalysis(Proposal proposal) throws ApiGenericException {
+    private void requestProposalAnalysis(Proposal proposal) {
         logger.info("Cliente vai ser analisado pelo serviço externo de analise de proposta.");
         ProposalAnalysisRequest proposalAnalysisRequest = new ProposalAnalysisRequest(
           proposal.getDocument(),
@@ -71,22 +70,18 @@ public class NewProposalController {
         );
         try {
             ProposalAnalysisResponse proposalAnalysisResponse = proposalAnalysisClient.requestAnalysis(proposalAnalysisRequest);
-            return proposalAnalysisResponse;
+            proposal.setStatus(ProposalStatusMapper.statusMap.get(proposalAnalysisResponse.getResultadoSolicitacao()));
         }
         catch (FeignException.UnprocessableEntity exception) {
             logger.warn("Proposta foi analisada com restrição.");
-            return new ProposalAnalysisResponse(
-                    proposal.getDocument(),
-                    proposal.getName(),
-                    "COM_RESTRICAO",
-                    proposal.getId().toString()
-            );
+            proposal.setStatus(ProposalStatus.NAO_ELEGIVEL);
         }
         catch (FeignException exception) {
-            throw new ApiGenericException(
+            logger.warn("Tivemos um problema ao analisar a proposta do cliente, entre em contato com o administrador.");
+            /* throw new ApiGenericException(
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     "Tivemos um problema ao analisar a proposta do cliente, entre em contato com o administrador."
-            );
+            ); */
         }
     }
 
