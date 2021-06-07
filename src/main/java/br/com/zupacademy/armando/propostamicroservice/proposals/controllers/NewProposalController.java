@@ -4,7 +4,7 @@ import br.com.zupacademy.armando.propostamicroservice.config.exceptionhandler.Ap
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.ProposalAnalysisClient;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.ProposalAnalysisRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response.ProposalAnalysisResponse;
-import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.requests.NewProposalRequest;
+import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.NewProposalRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
 import br.com.zupacademy.armando.propostamicroservice.proposals.repository.ProposalRepository;
 import br.com.zupacademy.armando.propostamicroservice.proposals.utils.ProposalStatusMapper;

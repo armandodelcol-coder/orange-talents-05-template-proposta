@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.propostamicroservice.proposals.dtos.requests;
+package br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request;
 
 import br.com.zupacademy.armando.propostamicroservice.core.validations.CPFOrCNPJ;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;

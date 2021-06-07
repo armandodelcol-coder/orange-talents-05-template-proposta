@@ -38,4 +38,20 @@ public class Card {
         this.limit = limit;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public LocalDateTime getEmissionDate() {
+        return emissionDate;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public BigDecimal getLimit() {
+        return limit;
+    }
+
 }
