@@ -18,6 +18,8 @@ public class CardProposalResponse {
     public BigDecimal limit;
     @JsonProperty
     public Integer dueDateDay;
+    @JsonProperty
+    public String identifierCode;
 
     public CardProposalResponse() {
     }
@@ -28,6 +30,7 @@ public class CardProposalResponse {
         this.owner = card.getOwner();
         this.limit = card.getLimit();
         this.dueDateDay = card.getDueDateDay();
+        this.identifierCode = card.getIdentifierCode();
     }
 
 }

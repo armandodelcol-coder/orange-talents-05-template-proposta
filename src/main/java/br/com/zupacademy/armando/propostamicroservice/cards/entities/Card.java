@@ -1,12 +1,10 @@
 package br.com.zupacademy.armando.propostamicroservice.cards.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_card")
@@ -30,6 +28,9 @@ public class Card {
     @NotNull
     @Column(columnDefinition = "tinyint unsigned", nullable = false)
     private Integer dueDateDay;
+
+    @Column(nullable = false)
+    private String identifierCode;
 
     @Deprecated
     public Card() {
@@ -61,6 +62,15 @@ public class Card {
 
     public Integer getDueDateDay() {
         return dueDateDay;
+    }
+
+    public String getIdentifierCode() {
+        return identifierCode;
+    }
+
+    @PrePersist
+    private void prePersist() {
+        this.identifierCode = UUID.randomUUID().toString();
     }
 
 }

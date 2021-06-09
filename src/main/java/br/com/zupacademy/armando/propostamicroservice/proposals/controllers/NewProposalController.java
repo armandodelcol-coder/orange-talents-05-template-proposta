@@ -47,7 +47,6 @@ public class NewProposalController {
         // Update na proposta
         proposalRepository.save(proposal);
         URI path = uriComponentsBuilder.path("/propostas/{id}").build(proposal.getId());
-        System.out.println("REALMENTE BUILDOU");
         return ResponseEntity.created(path).build();
     }
 

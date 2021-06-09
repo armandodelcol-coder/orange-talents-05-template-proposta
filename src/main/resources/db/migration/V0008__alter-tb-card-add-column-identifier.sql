@@ -1,0 +1,1 @@
+alter table tb_card add column identifier_code varchar(255) not null;
