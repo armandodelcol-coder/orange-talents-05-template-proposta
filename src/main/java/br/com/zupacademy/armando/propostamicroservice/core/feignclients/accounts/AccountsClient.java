@@ -1,6 +1,6 @@
-package br.com.zupacademy.armando.propostamicroservice.core.feignclients;
+package br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts;
 
-import br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response.CardResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,8 @@
 package br.com.zupacademy.armando.propostamicroservice.cards.components;
 
-import br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response.CardResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardResponse;
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.AccountsClient;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.AccountsClient;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
 import br.com.zupacademy.armando.propostamicroservice.proposals.repository.ProposalRepository;
 import feign.FeignException;

@@ -1,6 +1,6 @@
 package br.com.zupacademy.armando.propostamicroservice.cards.components;
 
-import br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response.CardResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardResponse;
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
 import org.springframework.stereotype.Component;
 

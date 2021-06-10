@@ -1,7 +1,7 @@
-package br.com.zupacademy.armando.propostamicroservice.core.feignclients;
+package br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis;
 
-import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.ProposalAnalysisRequest;
-import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response.ProposalAnalysisResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisRequest;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

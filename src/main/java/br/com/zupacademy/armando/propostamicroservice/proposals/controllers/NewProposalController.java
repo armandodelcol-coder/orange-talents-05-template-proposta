@@ -1,9 +1,9 @@
 package br.com.zupacademy.armando.propostamicroservice.proposals.controllers;
 
 import br.com.zupacademy.armando.propostamicroservice.config.exceptionhandler.ApiGenericException;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.ProposalAnalysisClient;
-import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.ProposalAnalysisRequest;
-import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response.ProposalAnalysisResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.ProposalAnalysisClient;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisRequest;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisResponse;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.NewProposalRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
 import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalStatus;

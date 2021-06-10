@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.propostamicroservice.cards.dtos.accountsclient.response;
+package br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos;
 
 import java.time.LocalDateTime;
 

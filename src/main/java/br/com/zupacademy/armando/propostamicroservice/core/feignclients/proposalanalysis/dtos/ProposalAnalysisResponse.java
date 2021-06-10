@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.propostamicroservice.proposals.dtos.response;
+package br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos;
 
 public class ProposalAnalysisResponse {
 
