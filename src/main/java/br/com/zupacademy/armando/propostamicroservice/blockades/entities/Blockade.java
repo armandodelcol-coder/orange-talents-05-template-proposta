@@ -31,10 +31,17 @@ public class Blockade {
     @JoinColumn(name = "card_id", nullable = false)
     private Card card;
 
+    @Column(nullable = false)
+    private Boolean success = false;
+
     public Blockade(String clientIp, String userAgent, Card card) {
         this.clientIp = clientIp;
         this.userAgent = userAgent;
         this.card = card;
+    }
+
+    public void blockadeWithSuccess() {
+        this.success = true;
     }
 
 }

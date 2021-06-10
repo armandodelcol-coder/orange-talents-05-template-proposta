@@ -1,0 +1,1 @@
+alter table tb_blockades add column success boolean not null;
