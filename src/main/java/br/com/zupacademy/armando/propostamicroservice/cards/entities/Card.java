@@ -1,5 +1,7 @@
 package br.com.zupacademy.armando.propostamicroservice.cards.entities;
 
+import br.com.zupacademy.armando.propostamicroservice.cards.enums.CardStatus;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -31,6 +33,10 @@ public class Card {
 
     @Column(nullable = false)
     private String identifierCode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CardStatus status = CardStatus.SEM_BLOQUEIO;
 
     @Deprecated
     public Card() {
@@ -68,9 +74,17 @@ public class Card {
         return identifierCode;
     }
 
+    public void setStatus(CardStatus status) {
+        this.status = status;
+    }
+
     @PrePersist
     private void prePersist() {
         this.identifierCode = UUID.randomUUID().toString();
+    }
+
+    public boolean isBlocked() {
+        return this.status.equals(CardStatus.BLOQUEADO);
     }
 
 }
