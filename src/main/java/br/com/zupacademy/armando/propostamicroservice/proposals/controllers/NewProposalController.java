@@ -1,6 +1,7 @@
 package br.com.zupacademy.armando.propostamicroservice.proposals.controllers;
 
 import br.com.zupacademy.armando.propostamicroservice.config.exceptionhandler.ApiGenericException;
+import br.com.zupacademy.armando.propostamicroservice.config.metrics.ProposalsMetrics;
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.ProposalAnalysisClient;
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisRequest;
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisResponse;
@@ -30,11 +31,14 @@ public class NewProposalController {
 
     private ProposalRepository proposalRepository;
     private ProposalAnalysisClient proposalAnalysisClient;
+    private ProposalsMetrics proposalsMetrics;
 
     public NewProposalController(ProposalRepository proposalRepository,
-                                 ProposalAnalysisClient proposalAnalysisClient) {
+                                 ProposalAnalysisClient proposalAnalysisClient,
+                                 ProposalsMetrics proposalsMetrics) {
         this.proposalRepository = proposalRepository;
         this.proposalAnalysisClient = proposalAnalysisClient;
+        this.proposalsMetrics = proposalsMetrics;
     }
 
     @PostMapping("/propostas")
@@ -58,6 +62,7 @@ public class NewProposalController {
 
         Proposal newProposal = proposalRequest.toModel();
         proposalRepository.save(newProposal);
+        this.proposalsMetrics.incrementProposalsCreated();
         return newProposal;
     }
 
