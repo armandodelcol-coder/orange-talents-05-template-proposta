@@ -4,6 +4,7 @@ delete from tb_proposal;
 delete from tb_card;
 delete from tb_blockades;
 delete from tb_travels;
+delete from tb_wallets;
 
 set foreign_key_checks = 1;
 

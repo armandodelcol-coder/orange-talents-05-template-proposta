@@ -50,7 +50,7 @@ public class NewWalletController {
         if (possibleCard.isEmpty()) throw new ApiGenericException(HttpStatus.NOT_FOUND, "Cartão não encontrado");
 
         Card card = possibleCard.get();
-        verifyDuplicateWalletName(newWalletRequest);
+        verifyDuplicateWalletName(newWalletRequest, card);
         Wallet newWallet = newWalletRequest.toModel(card);
         registerWalletInAccounts(card, newWallet);
         walletRepository.save(newWallet);
@@ -71,8 +71,8 @@ public class NewWalletController {
         }
     }
 
-    private void verifyDuplicateWalletName(NewWalletRequest newWalletRequest) throws ApiGenericException {
-        Optional<Wallet> possibleWallet = walletRepository.findByName(WalletName.valueOf(newWalletRequest.name));
+    private void verifyDuplicateWalletName(NewWalletRequest newWalletRequest, Card card) throws ApiGenericException {
+        Optional<Wallet> possibleWallet = walletRepository.findByNameAndCardId(WalletName.valueOf(newWalletRequest.name), card.getId());
         if (possibleWallet.isPresent()) throw new ApiGenericException(HttpStatus.UNPROCESSABLE_ENTITY, "Já existe uma carteira com esse nome para esse cartão.");
     }
 
