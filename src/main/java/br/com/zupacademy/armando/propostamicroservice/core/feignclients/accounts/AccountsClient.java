@@ -1,9 +1,6 @@
 package br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts;
 
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardBlockadeRequest;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardBlockadeResponse;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardResponse;
-import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.CardTravelNotifyRequest;
+import br.com.zupacademy.armando.propostamicroservice.core.feignclients.accounts.dtos.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,5 +19,8 @@ public interface AccountsClient {
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/cartoes/{id}/avisos", consumes = "application/json")
     ResponseEntity<?> travelNotify(@PathVariable("id") String id, @RequestBody CardTravelNotifyRequest cardTravelNotifyRequest);
+
+    @RequestMapping(method = RequestMethod.POST, path = "/api/cartoes/{id}/carteiras", consumes = "application/json")
+    ResponseEntity<?> newWallet(@PathVariable("id") String id, @RequestBody NewWalletAccountsRequest newWalletAccountsRequest);
 
 }
