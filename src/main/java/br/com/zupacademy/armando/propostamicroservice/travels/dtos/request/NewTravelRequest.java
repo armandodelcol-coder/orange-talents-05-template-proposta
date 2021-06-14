@@ -15,11 +15,11 @@ public class NewTravelRequest {
 
     @JsonProperty
     @NotBlank
-    private String destiny;
+    public String destiny;
 
     @JsonProperty
     @NotBlank @PresentOrFutureLocalDateTime(pattern = PATTERN_LOCALDATETIME)
-    private String endDate;
+    public String endDate;
 
     public Travel toModel(String ip, String userAgent, Card card) {
         LocalDateTime endDate = LocalDateTime.parse(this.endDate, DateTimeFormatter.ofPattern(PATTERN_LOCALDATETIME));

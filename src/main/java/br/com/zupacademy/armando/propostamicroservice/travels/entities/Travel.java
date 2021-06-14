@@ -8,6 +8,7 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Entity
@@ -49,6 +50,14 @@ public class Travel {
         this.clientIp = clientIp;
         this.userAgent = userAgent;
         this.card = card;
+    }
+
+    public String getDestiny() {
+        return destiny;
+    }
+
+    public String getEndDateTimeToString(DateTimeFormatter formatter) {
+        return endDate.format(formatter);
     }
 
 }
