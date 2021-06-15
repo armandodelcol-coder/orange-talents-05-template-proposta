@@ -1,7 +1,7 @@
 package br.com.zupacademy.armando.propostamicroservice.proposals.entities;
 
 import br.com.zupacademy.armando.propostamicroservice.cards.entities.Card;
-import br.com.zupacademy.armando.propostamicroservice.core.validations.CPFOrCNPJ;
+import br.com.zupacademy.armando.propostamicroservice.core.utils.ProposalDocumentEncrypt;
 import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalStatus;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ public class Proposal {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank @CPFOrCNPJ
+    @NotBlank
     @Column(nullable = false)
     private String document;
 
@@ -95,6 +95,11 @@ public class Proposal {
 
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    @PrePersist
+    private void prePersist() {
+        this.document = ProposalDocumentEncrypt.genSecureHash(this.document);
     }
 
 }

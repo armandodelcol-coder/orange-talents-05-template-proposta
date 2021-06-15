@@ -5,6 +5,7 @@ import br.com.zupacademy.armando.propostamicroservice.config.metrics.ProposalsMe
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.ProposalAnalysisClient;
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisRequest;
 import br.com.zupacademy.armando.propostamicroservice.core.feignclients.proposalanalysis.dtos.ProposalAnalysisResponse;
+import br.com.zupacademy.armando.propostamicroservice.core.utils.ProposalDocumentEncrypt;
 import br.com.zupacademy.armando.propostamicroservice.proposals.dtos.request.NewProposalRequest;
 import br.com.zupacademy.armando.propostamicroservice.proposals.entities.Proposal;
 import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalStatus;
@@ -67,7 +68,7 @@ public class NewProposalController {
     }
 
     private Proposal newProposalCreated(NewProposalRequest proposalRequest) throws ApiGenericException {
-        Optional<Proposal> possibleProposal = proposalRepository.findByDocument(proposalRequest.document);
+        Optional<Proposal> possibleProposal = proposalRepository.findByDocument(ProposalDocumentEncrypt.genSecureHash(proposalRequest.document));
         if (possibleProposal.isPresent()) {
             throw new ApiGenericException(HttpStatus.UNPROCESSABLE_ENTITY, "Já existe uma proposta para esse documento");
         }
