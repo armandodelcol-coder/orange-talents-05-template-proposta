@@ -11,6 +11,8 @@ import br.com.zupacademy.armando.propostamicroservice.proposals.enums.ProposalSt
 import br.com.zupacademy.armando.propostamicroservice.proposals.repository.ProposalRepository;
 import br.com.zupacademy.armando.propostamicroservice.proposals.utils.ProposalStatusMapper;
 import feign.FeignException;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -32,18 +34,28 @@ public class NewProposalController {
     private ProposalRepository proposalRepository;
     private ProposalAnalysisClient proposalAnalysisClient;
     private ProposalsMetrics proposalsMetrics;
+    private final Tracer tracer;
 
     public NewProposalController(ProposalRepository proposalRepository,
                                  ProposalAnalysisClient proposalAnalysisClient,
-                                 ProposalsMetrics proposalsMetrics) {
+                                 ProposalsMetrics proposalsMetrics, Tracer tracer) {
         this.proposalRepository = proposalRepository;
         this.proposalAnalysisClient = proposalAnalysisClient;
         this.proposalsMetrics = proposalsMetrics;
+        this.tracer = tracer;
     }
 
     @PostMapping("/propostas")
     public ResponseEntity<?> newProposal(@RequestBody @Valid NewProposalRequest newProposalRequest,
                                          UriComponentsBuilder uriComponentsBuilder) throws ApiGenericException {
+        // Testando OpenTracaing tag customizada
+        Span activeSpan = tracer.activeSpan();
+        activeSpan.setTag("client.id", "propostas-microservice");
+        // Testando OpenTracaing baggage customizada
+        activeSpan.setBaggageItem("client.id", "propostas-microservice");
+        // Testando OpenTracing log customizado
+        activeSpan.log("Testando Log");
+
         // Criar proposta
         Proposal proposal = newProposalCreated(newProposalRequest);
         // Fazer analise da proposta em uma api externa e Seta o status da proposta baseado na resposta da api externa
